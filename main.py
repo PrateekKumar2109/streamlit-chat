@@ -60,6 +60,15 @@ def load_chain(vectorstore,QA_PROMPT,CONDENSE_QUESTION_PROMPT):
     return chain
 
 
+ chat_history = []
+ print("Chat with your docs!")
+ while True:
+        print("Human:")
+        question = input()
+        result = load_chain({"question": question, "chat_history": chat_history})
+        chat_history.append((question, result["answer"]))
+        print("AI:")
+        print(result["answer"])
 
 
 chain = load_chain(vectorstore,QA_PROMPT,CONDENSE_QUESTION_PROMPT)
