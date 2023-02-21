@@ -58,7 +58,7 @@ def get_text():
 user_input = get_text()
 if st.button("Submit Your Query"):
     # check 
-    docs = vectorstore.similarity_search(user_input)
+    docs = docsearch.similarity_search(user_input)
     # if checkbox is checked, print docs
 
     print(len(docs))
