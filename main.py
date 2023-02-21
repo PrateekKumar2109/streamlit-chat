@@ -27,7 +27,7 @@ def load_chain(vectorstore):
     llm = Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0)
     chain = ChatVectorDBChain.from_llm(
         llm,
-        vectorstore
+        vectorstore)
     #chain = ConversationChain(llm=llm)
     return chain
 
