@@ -6,13 +6,16 @@ from langchain.chains import ConversationChain
 from langchain.llms import OpenAI,Cohere
 from langchain.vectorstores.faiss import FAISS
 from langchain.embeddings import OpenAIEmbeddings,CohereEmbeddings
+from langchain.chains import ChatVectorDBChain
 import pickle
 
 def load_chain():
     """Logic for loading the chain you want to use should go here."""
-    llm = Cohere(temperature=0)
+    llm = Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0)
     chain = ConversationChain(llm=llm)
     return chain
+
+
 
 chain = load_chain()
 
