@@ -2,6 +2,11 @@
 import streamlit as st
 from streamlit_chat import message
 
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders import ReadTheDocsLoader
+from langchain.vectorstores.faiss import FAISS
+from langchain.embeddings import OpenAIEmbeddings
+import pickle
 from langchain.chains import ConversationChain
 from langchain.llms import OpenAI,Cohere
 from langchain.vectorstores.faiss import FAISS
