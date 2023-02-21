@@ -47,6 +47,7 @@ if "generated" not in st.session_state:
 if "past" not in st.session_state:
     st.session_state["past"] = []
 
+placeholder = st.empty()
 user_input= placeholder.text_input("Enter some text 👇", "", key="input")
 
 if user_input:
