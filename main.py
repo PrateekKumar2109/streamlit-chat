@@ -25,7 +25,7 @@ documents = text_splitter.split_text(raw_documents)
 # Load Data to vectorstore
 embeddings = CohereEmbeddings(cohere_api_key= "vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg")
 #embeddings = OpenAIEmbeddings()
-vectorstore = FAISS.from_documents(documents, embeddings)
+vectorstore = FAISS.from_texts(documents, embeddings)
 
 def load_chain(vectorstore):
     """Logic for loading the chain you want to use should go here."""
