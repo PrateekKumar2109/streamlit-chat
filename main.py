@@ -54,7 +54,8 @@ if "past" not in st.session_state:
 
 
 def get_text():
-    input_text = st.text_input("You: ", "Write me a linkedin post?", key="input")
+    #input_text = st.text_input("You: ", "Write me a linkedin post?", key="input")
+    input_text = st.text_input("You: ", "", key="input")
     return input_text
 
 
