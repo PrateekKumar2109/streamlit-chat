@@ -38,7 +38,7 @@ Question: {question}
 Answer in Markdown:"""
 QA_PROMPT = PromptTemplate(template=template, input_variables=["question", "context"])
 # Split text
-text_splitter = RecursiveCharacterTextSplitter(chunk_size = 300,
+text_splitter = RecursiveCharacterTextSplitter(chunk_size = 500,
     chunk_overlap  = 0)
 documents = text_splitter.split_text(raw_documents)
 
@@ -48,7 +48,7 @@ embeddings = CohereEmbeddings(cohere_api_key= "vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZ
 #embeddings = OpenAIEmbeddings()
 vectorstore = FAISS.from_texts(documents, embeddings)
 
-def load_chain(vectorstore):
+def load_chain(vectorstore,QA_PROMPT,CONDENSE_QUESTION_PROMPT):
     """Logic for loading the chain you want to use should go here."""
     llm = Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0)
     chain = ChatVectorDBChain.from_llm(
@@ -62,7 +62,7 @@ def load_chain(vectorstore):
 
 
 
-chain = load_chain(vectorstore)
+chain = load_chain(vectorstore,QA_PROMPT,CONDENSE_QUESTION_PROMPT)
 
 # From here down is all the StreamLit UI.
 st.set_page_config(page_title="Chatbot", page_icon=":shark:")
