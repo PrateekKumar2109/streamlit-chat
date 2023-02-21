@@ -33,7 +33,7 @@ docsearch = FAISS.from_texts(documents, embeddings)
 
 
 qa=VectorDBQA.from_chain_type(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg"),
-                              chain_type="stuff", vectorstore=docsearch, return_source_documents=True)
+                              chain_type="stuff", vectorstore=docsearch, return_source_documents=False)
 
 #chain = load_chain(vectorstore,QA_PROMPT,CONDENSE_QUESTION_PROMPT)
 
@@ -51,10 +51,10 @@ placeholder = st.empty()
 user_input= placeholder.text_input("Enter some text 👇", "", key="input")
 
 if user_input:
-    output = qa({"query": user_input})
+    output = qa.run(user_input)
     
     st.session_state.past.append(user_input)
-    st.session_state.generated.append(output[0])
+    st.session_state.generated.append(output)
 
 if st.session_state["generated"]:
 
