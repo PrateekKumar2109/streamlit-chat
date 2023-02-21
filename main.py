@@ -51,10 +51,10 @@ placeholder = st.empty()
 user_input= placeholder.text_input("Enter some text 👇", "", key="input")
 
 if user_input:
-    output = qa.run(user_input)
-
+    output = qa({"query": user_input})
+    
     st.session_state.past.append(user_input)
-    st.session_state.generated.append(output)
+    st.session_state.generated.append(output[0])
 
 if st.session_state["generated"]:
 
