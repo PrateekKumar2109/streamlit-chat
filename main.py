@@ -47,10 +47,22 @@ if "generated" not in st.session_state:
 if "past" not in st.session_state:
     st.session_state["past"] = []
 
-placeholder = st.empty()
-user_input= placeholder.text_input("Enter some text 👇", "", key="input")
 
-if user_input:
+placeholder = st.empty()
+def get_text():
+    
+    input_text = placeholder.text_input("Enter some text 👇", "", key="input")
+    return input_text
+
+
+user_input = get_text()
+if st.button("Submit Your Query"):
+    # check 
+    docs = vectorstore.similarity_search(user_input)
+    # if checkbox is checked, print docs
+
+    print(len(docs))
+#if user_input:
     output = qa.run(user_input)
     
     st.session_state.past.append(user_input)
