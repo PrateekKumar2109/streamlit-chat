@@ -3,3 +3,6 @@ openai
 streamlit
 streamlit-chat
 cohere
+unstructured
+faiss-cpu
+bs4
