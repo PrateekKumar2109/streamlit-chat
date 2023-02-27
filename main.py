@@ -32,9 +32,11 @@ docsearch = FAISS.from_texts(documents, embeddings)
 
 
 
-qa=VectorDBQA.from_chain_type(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0),
-                              chain_type="stuff", vectorstore=docsearch, return_source_documents=False)
+#qa=VectorDBQA.from_chain_type(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0),
+#                              chain_type="stuff", vectorstore=docsearch, return_source_documents=False)
 
+qa=ChatVectorDBChain.from_llm(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0),
+                             vectorstore=docsearch)
 #chain = load_chain(vectorstore,QA_PROMPT,CONDENSE_QUESTION_PROMPT)
 
 # From here down is all the StreamLit UI.
@@ -63,10 +65,12 @@ if st.button("Submit Your Query"):
 
     print(len(docs))
 #if user_input:
-    output = qa.run(user_input)
+    chat_history = []
+    output = qa({"question": user_input, "chat_history": chat_history})
+    #output = qa.run(user_input)
     
     st.session_state.past.append(user_input)
-    st.session_state.generated.append(output)
+    st.session_state.generated.append(output["answer"])
 
 if st.session_state["generated"]:
 
