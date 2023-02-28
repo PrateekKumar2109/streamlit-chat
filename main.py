@@ -44,7 +44,7 @@ QA_PROMPT = PromptTemplate(
 #embeddings = CohereEmbeddings(cohere_api_key= "vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg")
 #embeddings = OpenAIEmbeddings()
 #docsearch = FAISS.from_texts(documents, embeddings)
-def load_vectorstore(model):
+def load_vectorstore():
     '''load embeddings and vectorstore'''
            
     embeddings = CohereEmbeddings(cohere_api_key= "vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg")
