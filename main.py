@@ -23,7 +23,7 @@ from langchain.prompts.prompt import PromptTemplate
 # Split text
 text_splitter = RecursiveCharacterTextSplitter(chunk_size = 500,
     chunk_overlap  = 0)
-documents = text_splitter.split_text(raw_documents)
+#documents = text_splitter.split_text(raw_documents)
 
 _template = """Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.
 Chat History:
