@@ -62,9 +62,8 @@ docsearch = load_vectorstore()
 #qa=VectorDBQA.from_chain_type(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0),
 #                              chain_type="stuff", vectorstore=docsearch, return_source_documents=False)
 
-qa=ChatVectorDBChain.from_llm(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0.7),vectorstore=docsearch,
-#qa_prompt=QA_PROMPT,
-        #condense_question_prompt=CONDENSE_QUESTION_PROMPT
+qa=ChatVectorDBChain.from_llm(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0.7),vectorstore=docsearch,qa_prompt=QA_PROMPT,
+        condense_question_prompt=CONDENSE_QUESTION_PROMPT
                              )
 #chain = load_chain(vectorstore,QA_PROMPT,CONDENSE_QUESTION_PROMPT)
 
@@ -95,8 +94,8 @@ if st.button("Submit Your Query"):
     print(len(docs))
 #if user_input:
     chat_history = []
-    #output = qa({"question": user_input, "chat_history": chat_history})
-    output = qa.run(user_input)
+    output = qa({"question": user_input, "chat_history": chat_history})
+    #output = qa.run(user_input)
     
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output["answer"])
