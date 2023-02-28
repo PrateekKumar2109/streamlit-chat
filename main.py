@@ -62,9 +62,10 @@ docsearch = load_vectorstore()
 #qa=VectorDBQA.from_chain_type(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0),
 #                              chain_type="stuff", vectorstore=docsearch, return_source_documents=False)
 
-qa=ChatVectorDBChain.from_llm(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0.7),
-                             vectorstore=docsearch, qa_prompt=QA_PROMPT,
-        condense_question_prompt=CONDENSE_QUESTION_PROMPT)
+qa=ChatVectorDBChain.from_llm(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0.7),vectorstore=docsearch,
+#qa_prompt=QA_PROMPT,
+        #condense_question_prompt=CONDENSE_QUESTION_PROMPT
+                             )
 #chain = load_chain(vectorstore,QA_PROMPT,CONDENSE_QUESTION_PROMPT)
 
 # From here down is all the StreamLit UI.
