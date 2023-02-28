@@ -95,8 +95,8 @@ if st.button("Submit Your Query"):
     print(len(docs))
 #if user_input:
     chat_history = []
-    output = qa({"question": user_input, "chat_history": chat_history})
-    #output = qa.run(user_input)
+    #output = qa({"question": user_input, "chat_history": chat_history})
+    output = qa.run(user_input)
     
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output["answer"])
