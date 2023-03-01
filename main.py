@@ -70,11 +70,11 @@ qa=ChatVectorDBChain.from_llm(llm=Cohere(model="command-xlarge-nightly", cohere_
 
 # From here down is all the StreamLit UI.
 st.set_page_config(page_title="Chatbot", page_icon=":shark:")
-st.header("Chat over WCRs")
+st.header("Chat with WCRs")
 expander = st.expander("Know about Me ")
 
 expander.write("""
-     I am an AI assistant for Oil and Gas Engineers based on LLMs(Large Language Models).Presently I know about wells R_7A#1,3,7,8,
+     I am an AI assistant for Oil and Gas Engineers based on LLMs(Large Language Models).Presently I know about the completion report of wells R_7A#1,3,7,8,
      R_10A#1,2 &3. Consider the generated response as starting point to assist in our work. 
      
  """)
