@@ -32,7 +32,7 @@ Follow Up Input: {question}
 Standalone question:"""
 CONDENSE_QUESTION_PROMPT = PromptTemplate.from_template(_template)
 
-prompt_template = """You are an AI assistant for answering questions about the dilling activites of an oil and gas field. You are given the following extracted parts of a long document and a question. Provide a conversational answer. If you don't know the answer, just say that you don't know, don't try to make up an answer.
+prompt_template = """You are an AI assistant for answering questions from the relevant embeddings.  Provide a conversational answer. If you don't know the answer, just say that you don't know, don't try to make up an answer.
 {context}
 Question: {question}
 Helpful Answer:"""
@@ -62,15 +62,22 @@ docsearch = load_vectorstore()
 #qa=VectorDBQA.from_chain_type(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0),
 #                              chain_type="stuff", vectorstore=docsearch, return_source_documents=False)
 
-qa=ChatVectorDBChain.from_llm(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0.7),vectorstore=docsearch,qa_prompt=QA_PROMPT,
-        condense_question_prompt=CONDENSE_QUESTION_PROMPT
+qa=ChatVectorDBChain.from_llm(llm=Cohere(model="command-xlarge-nightly", cohere_api_key="vGCEakgncpouo9Nz0rsJ0Bq7XRvwNgTCZMKSohlg",temperature=0.7),
+                              vectorstore=docsearch,qa_prompt=QA_PROMPT,,verbose=True,streaming=True
+        #condense_question_prompt=CONDENSE_QUESTION_PROMPT
                              )
 #chain = load_chain(vectorstore,QA_PROMPT,CONDENSE_QUESTION_PROMPT)
 
 # From here down is all the StreamLit UI.
 st.set_page_config(page_title="Chatbot", page_icon=":shark:")
-st.header("ChatBot Demo")
+st.header("Chat over WCRs")
+expander = st.expander("Know about Me ")
 
+expander.write("""
+     I am an AI assistant for Oil and Gas Engineers based on LLMs(Large Language Models).Presently I know about wells R_7A#1,3,7,8,
+     R_10A#1,2 &3. Consider the generated response as starting point to assist in our work. 
+     
+ """)
 if "generated" not in st.session_state:
     st.session_state["generated"] = []
 
@@ -103,7 +110,7 @@ if st.button("Submit Your Query"):
 if st.session_state["generated"]:
 
     for i in range(len(st.session_state["generated"]) - 1, -1, -1):
-        message(st.session_state["past"][i], is_user=True, key=str(i) + "_user")
+        message(st.session_state["past"][i], is_user=True,avatar_style="adventurer", key=str(i) + "_user")
 
-        message(st.session_state["generated"][i], key=str(i))
+        message(st.session_state["generated"][i],avatar_style="bottts-neutral", key=str(i))
         
